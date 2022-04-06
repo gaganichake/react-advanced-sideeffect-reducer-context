@@ -12,10 +12,19 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
-  }, [enteredEmail, enteredPassword]);
+    // Checking Form validity after every 500 milliseconds only when email/password changes
+    const timer = setTimeout(() => {
+      console.log('setTimeout()');
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500);// Wait for 500 miliseconds after every key stroke
+
+    return () => {
+      console.log('CLEANUP!');
+      clearTimeout(timer); // Reset the prevous timer before setTimeout() is executed again.
+    };
+  }, [enteredEmail, enteredPassword]); // useEffect is executed only when these two dependencies change.
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);

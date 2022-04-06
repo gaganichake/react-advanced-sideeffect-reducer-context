@@ -13,7 +13,8 @@ function App() {
     if(storedUserLoginInfo === '1'){
       setIsLoggedIn(true);
     }
-  }, []);
+  }, []); // UseEffect is executed only once if this dependency array is empty [].
+  //Note: If this dependency array itself is not provided then useEffect will be executed everytime when this component is eveluated, like a regular function.
 
   const loginHandler = (email, password) => {
     // We should of course check email and password
