@@ -20,27 +20,35 @@ const Login = (props) => {
     }
   }, [passwordIsValid]); // Dependency veriables/props in array.
 
-  useEffect(() => {
-    // Checking Form validity after every 500 milliseconds only when email/password changes
-    const timer = setTimeout(() => {
-      console.log('setTimeout()');
-      setFormIsValid(
-        enteredEmail.includes('@') && enteredPassword.trim().length > 6
-      );
-    }, 500);// Wait for 500 miliseconds after every key stroke
+  // useEffect(() => {
+  //   // Checking Form validity after every 500 milliseconds only when email/password changes
+  //   const timer = setTimeout(() => {
+  //     console.log('setTimeout()');
+  //     setFormIsValid(
+  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
+  //     );
+  //   }, 500);// Wait for 500 miliseconds after every key stroke
 
-    return () => {
-      console.log('CLEANUP!');
-      clearTimeout(timer); // Reset the prevous timer before setTimeout() is executed again.
-    };
-  }, [enteredEmail, enteredPassword]); // useEffect is executed only when these two dependencies change.
+  //   return () => {
+  //     console.log('CLEANUP!');
+  //     clearTimeout(timer); // Reset the prevous timer before setTimeout() is executed again.
+  //   };
+  // }, [enteredEmail, enteredPassword]); // useEffect is executed only when these two dependencies change.
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+
+    setFormIsValid(
+      event.target.value.includes('@') && enteredPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+
+    setFormIsValid(
+      enteredEmail.includes('@') && event.target.value.trim().length > 6
+    );
   };
 
   const validateEmailHandler = () => {
