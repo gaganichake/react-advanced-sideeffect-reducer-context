@@ -11,6 +11,15 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  // userEffect summary
+  // useEffect(() => {
+  //   console.log('EFFECT RUNNING');
+
+  //   return () => {
+  //     console.log('EFFECT CLEANUP');
+  //   }
+  // }, []); // Dependency veriables/props in array.
+
   useEffect(() => {
     // Checking Form validity after every 500 milliseconds only when email/password changes
     const timer = setTimeout(() => {
